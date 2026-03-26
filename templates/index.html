@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Outfit Recommender</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="min-h-screen bg-gradient-to-br from-black via-gray-900 to-purple-900 flex items-center justify-center px-4 text-white">
+
+<div class="w-full max-w-md bg-white/10 backdrop-blur-xl border border-white/20 p-6 rounded-3xl shadow-2xl transition-all duration-500">
+
+    <h1 class="text-3xl font-bold text-center mb-6">🔥 AI Stylist</h1>
+
+    <form method="POST" class="space-y-4">
+
+        <select name="occasion" class="w-full p-3 rounded-xl bg-black/40">
+            <option value="casual">Casual</option>
+            <option value="party">Party</option>
+        </select>
+
+        <select name="weather" class="w-full p-3 rounded-xl bg-black/40">
+            <option value="hot">Hot</option>
+            <option value="cold">Cold</option>
+        </select>
+
+        <select name="style" class="w-full p-3 rounded-xl bg-black/40">
+            <option value="simple">Simple</option>
+            <option value="stylish">Stylish</option>
+        </select>
+
+        <select name="height" class="w-full p-3 rounded-xl bg-black/40">
+            <option value="short">Short</option>
+            <option value="average">Average</option>
+            <option value="tall">Tall</option>
+        </select>
+
+        <select name="skin" class="w-full p-3 rounded-xl bg-black/40">
+            <option value="light">Light</option>
+            <option value="medium">Medium</option>
+            <option value="dark">Dark</option>
+        </select>
+
+        <button id="submitBtn"
+        class="w-full bg-gradient-to-r from-purple-500 to-pink-500 p-3 rounded-xl hover:scale-105 transition duration-300">
+            ✨ Generate Outfit
+        </button>
+
+    </form>
+
+    <!-- Loader -->
+    <div id="loader" class="hidden mt-4 text-center">
+        <div class="animate-spin rounded-full h-8 w-8 border-t-2 border-white mx-auto"></div>
+        <p class="text-sm mt-2 text-white/80">Generating your outfit...</p>
+    </div>
+
+    {% if outfit %}
+    <div class="mt-6 animate-fade-in transform transition duration-500 hover:scale-105">
+
+<!--        <img src="{{ outfit.image }}" class="rounded-2xl mb-4 shadow-lg w-full h-64 object-cover">-->
+
+        <div class="bg-white/10 p-4 rounded-xl space-y-1">
+            <p>👕 {{ outfit.upper }}</p>
+            <p>👖 {{ outfit.lower }}</p>
+            <p>👟 {{ outfit.footwear }}</p>
+            <p>⌚ {{ outfit.accessory }}</p>
+        </div>
+
+    </div>
+    {% endif %}
+
+</div>
+
+<script>
+const form = document.querySelector("form");
+const loader = document.getElementById("loader");
+
+form.addEventListener("submit", () => {
+    loader.classList.remove("hidden");
+});
+</script>
+
+<style>
+@keyframes fadeIn {
+    from {opacity:0; transform: translateY(10px);}
+    to {opacity:1; transform: translateY(0);}
+}
+.animate-fade-in {
+    animation: fadeIn 0.6s ease-in-out;
+}
+</style>
+
+</body>
+</html>
